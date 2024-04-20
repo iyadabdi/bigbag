@@ -1,0 +1,28 @@
+{
+    "manifest_version": 3,
+    "name": "Internet Bag",
+    "version": "1.0",
+    "permissions": [
+        "storage",
+        "activeTab",
+        "<all_urls>",
+        "tabs",
+        "declarativeNetRequest"
+    ],
+    "host_permissions": [
+        "http://localhost/*"
+    ],
+    "action": {
+        "default_popup": "popup.html"
+    },
+    "background": {
+        "service_worker": "background.js"
+    },
+    "content_scripts": [
+        {
+            "matches": ["http://*/*", "https://*/*"],
+            "js": ["content.js"]
+        }
+    ]
+}
+

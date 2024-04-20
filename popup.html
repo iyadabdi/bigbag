@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Shopping Extension</title>
+    <link rel="stylesheet" href="popup.css"> <!-- Link to your CSS file -->
+</head>
+<body>
+    <h1>INTERNET BAG</h1>
+    <form id="productForm">
+        <input type="text" id="productName" placeholder="Enter product name" required>
+        <input type="url" id="productUrl" placeholder="Enter product URL" required>
+        <button type="submit">Save Product</button>
+    </form>
+    <div id="productList">
+        <!-- Products will be added here dynamically -->
+    </div>
+    <script src="popup.js"></script> <!-- Link to your JS file -->
+</body>
+</html>
