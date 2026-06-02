@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Privacy Policy — Big Bag</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0c0c0e;--surface:#131316;--border:rgba(255,255,255,0.07);--text:#f0f0f2;--text2:#8a8a95;--text3:#4a4a55;--f:#d4178a;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.7;padding:0}
+nav{padding:20px 48px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;text-decoration:none;color:var(--text)}
+.nav-logo span{color:var(--f)}
+.back{color:var(--text2);text-decoration:none;font-size:14px}
+.back:hover{color:var(--text)}
+main{max-width:720px;margin:0 auto;padding:80px 24px 120px}
+h1{font-family:'Playfair Display',serif;font-size:42px;font-weight:700;letter-spacing:-.02em;margin-bottom:8px}
+.updated{color:var(--text3);font-size:13px;margin-bottom:48px}
+h2{font-size:18px;font-weight:600;margin:40px 0 12px;color:var(--text)}
+p{color:var(--text2);font-weight:300;margin-bottom:16px}
+ul{color:var(--text2);font-weight:300;padding-left:20px;margin-bottom:16px}
+ul li{margin-bottom:6px}
+table{width:100%;border-collapse:collapse;margin:16px 0 24px;font-size:14px}
+th{text-align:left;padding:10px 14px;background:var(--surface);color:var(--text);font-weight:500;border:1px solid var(--border)}
+td{padding:10px 14px;color:var(--text2);border:1px solid var(--border);font-weight:300}
+footer{text-align:center;padding:32px;border-top:1px solid var(--border);color:var(--text3);font-size:13px}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">🛍 Big<span>Bag</span></a>
+  <a href="index.html" class="back">← Back to home</a>
+</nav>
+<main>
+  <h1>Privacy Policy</h1>
+  <p class="updated">Last updated: June 2026</p>
+  <p>Big Bag is a Chrome extension that helps you save and manage shopping items from multiple online stores. This policy explains what data is handled, how it is stored, and your rights. <strong>The short version: everything stays on your device. Nothing is ever sent to any server.</strong></p>
+  <h2>What data the extension handles</h2>
+  <p><strong>Product information.</strong> When you click "Save to Big Bag", the extension reads and locally saves the product title, price, image URL, product page URL, store domain, and selected variant (size, colour, etc.).</p>
+  <p><strong>Autofill profile.</strong> If you choose to enter shipping and payment details in the Autofill Profile tab, this is stored in Chrome's local extension storage on your device. It is never transmitted anywhere and is used solely to fill checkout forms at your direction.</p>
+  <h2>What the extension does not do</h2>
+  <ul>
+    <li>Does not transmit any data to any server or third party</li>
+    <li>Does not track your browsing history</li>
+    <li>Does not use analytics or crash reporting</li>
+    <li>Does not display advertising</li>
+    <li>Does not share information with anyone</li>
+  </ul>
+  <h2>Permissions explained</h2>
+  <table>
+    <tr><th>Permission</th><th>Why it's needed</th></tr>
+    <tr><td>storage</td><td>To save your bag items and autofill profile locally on your device</td></tr>
+    <tr><td>tabs</td><td>To open product pages when you use Buy All</td></tr>
+    <tr><td>scripting</td><td>To inject the Save button on product pages and autofill checkout forms</td></tr>
+    <tr><td>activeTab</td><td>To read the current product page when you save an item</td></tr>
+    <tr><td>&lt;all_urls&gt;</td><td>To show the Save button and autofill forms on any shopping website</td></tr>
+  </table>
+  <h2>Deleting your data</h2>
+  <p>Click the 🗑 button in the popup to clear all saved items. Uninstalling the extension removes all associated local data immediately.</p>
+  <h2>Children's privacy</h2>
+  <p>This extension is not directed at children under 13 and does not knowingly collect information from children.</p>
+  <h2>Contact</h2>
+  <p>Questions? Reach out via the Chrome Web Store support tab on the Big Bag listing page.</p>
+</main>
+<footer>© 2026 Big Bag</footer>
+</body>
+</html>

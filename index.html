@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Big Bag — One bag, every store</title>
+<meta name="description" content="Save items from any online store into one universal shopping bag. Group, organise, and buy all at once."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0c0c0e;
+  --surface:#131316;
+  --surface2:#1a1a1e;
+  --border:rgba(255,255,255,0.07);
+  --text:#f0f0f2;
+  --text2:#8a8a95;
+  --text3:#4a4a55;
+  --f:#d4178a;
+  --fl:#e83ca2;
+  --gold:#e8c547;
+  --white:#ffffff;
+  --radius:14px;
+}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'DM Sans',sans-serif;
+  font-size:16px;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 48px;
+  background:rgba(12,12,14,0.85);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{
+  display:flex;align-items:center;gap:10px;
+  font-family:'Playfair Display',serif;font-size:22px;font-weight:700;
+  color:var(--text);text-decoration:none;letter-spacing:-.01em;
+}
+.nav-logo .logo-word{font-size:22px;font-weight:700;color:var(--text)}
+.nav-logo .logo-gap{letter-spacing:-.04em}
+.nav-links{display:flex;gap:32px;align-items:center}
+.nav-links a{color:var(--text2);text-decoration:none;font-size:14px;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{
+  background:var(--gold);color:#0c0c0e;
+  padding:10px 22px;border-radius:50px;
+  font-size:14px;font-weight:600;text-decoration:none;
+  transition:all .2s;white-space:nowrap;
+}
+.nav-cta:hover{background:#f0d060;transform:translateY(-1px)}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:120px 48px 80px;
+  position:relative;overflow:hidden;
+}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px);
+  background-size:44px 44px;
+  pointer-events:none;
+}
+.hero-glow{
+  position:absolute;
+  width:600px;height:600px;
+  right:-100px;top:50%;transform:translateY(-50%);
+  background:radial-gradient(circle,rgba(212,23,138,0.12) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero-inner{max-width:1200px;margin:0 auto;width:100%;position:relative}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(212,23,138,0.1);border:1px solid rgba(212,23,138,0.25);
+  color:var(--f);font-size:12px;font-weight:600;
+  padding:6px 14px;border-radius:50px;
+  letter-spacing:.06em;text-transform:uppercase;
+  margin-bottom:28px;
+}
+.hero-eyebrow::before{content:'';width:6px;height:6px;background:var(--f);border-radius:50%}
+h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(52px,7vw,96px);
+  font-weight:900;line-height:1.0;
+  letter-spacing:-0.03em;
+  margin-bottom:24px;
+  max-width:720px;
+}
+h1 em{color:var(--f);font-style:italic}
+.hero-sub{
+  font-size:clamp(16px,2vw,20px);
+  color:var(--text2);
+  max-width:480px;
+  line-height:1.65;
+  margin-bottom:44px;
+  font-weight:300;
+}
+.hero-actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.btn-primary{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--gold);color:#0c0c0e;
+  padding:16px 32px;border-radius:50px;
+  font-size:16px;font-weight:600;text-decoration:none;
+  transition:all .25s cubic-bezier(.34,1.56,.64,1);
+  box-shadow:0 0 40px rgba(232,197,71,0.2);
+}
+.btn-primary:hover{background:#f0d060;transform:scale(1.04) translateY(-2px);box-shadow:0 0 60px rgba(232,197,71,0.4)}
+.btn-primary svg{width:18px;height:18px}
+.btn-ghost{
+  color:var(--text2);font-size:15px;font-weight:400;text-decoration:none;
+  display:inline-flex;align-items:center;gap:6px;
+  transition:color .2s;
+}
+.btn-ghost:hover{color:var(--text)}
+.hero-proof{
+  margin-top:64px;
+  display:flex;align-items:center;gap:20px;flex-wrap:wrap;
+}
+.hero-proof-item{display:flex;align-items:center;gap:8px;color:var(--text3);font-size:13px}
+.hero-proof-item span{color:var(--gold)}
+.proof-div{width:1px;height:14px;background:var(--border)}
+
+/* ── DEMO MOCKUP ── */
+.demo-section{
+  padding:0 48px 120px;
+  position:relative;
+}
+.demo-inner{max-width:1200px;margin:0 auto}
+.demo-label{
+  text-align:center;font-size:12px;
+  text-transform:uppercase;letter-spacing:.1em;
+  color:var(--text3);font-weight:600;margin-bottom:40px;
+}
+.mockup-wrap{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 40px 120px rgba(0,0,0,0.6),0 0 0 1px rgba(255,255,255,0.04);
+}
+.mockup-bar{
+  display:flex;align-items:center;gap:8px;
+  padding:14px 20px;
+  background:var(--surface2);
+  border-bottom:1px solid var(--border);
+}
+.mockup-dot{width:12px;height:12px;border-radius:50%}
+.mockup-dot:nth-child(1){background:#ff5f57}
+.mockup-dot:nth-child(2){background:#febc2e}
+.mockup-dot:nth-child(3){background:#28c840}
+.mockup-url{
+  flex:1;margin:0 16px;
+  background:rgba(255,255,255,0.05);
+  border-radius:6px;padding:5px 12px;
+  font-size:12px;color:var(--text3);
+  font-family:monospace;
+}
+.mockup-body{display:flex}
+.mockup-popup{
+  width:380px;flex-shrink:0;
+  background:#0f0f11;
+  border-right:1px solid var(--border);
+  font-size:12px;
+}
+.popup-header{
+  padding:14px 16px 10px;
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.popup-logo{font-family:'Playfair Display',serif;font-size:18px;font-weight:700}
+.popup-logo sub{font-family:'DM Sans',sans-serif;font-size:9px;color:var(--text3);display:block;font-weight:400;letter-spacing:.06em;text-transform:uppercase;line-height:1.2}
+.popup-tabs{display:flex;border-bottom:1px solid var(--border);padding:0 14px}
+.ptab{padding:8px 12px;font-size:11px;font-weight:500;color:var(--text3);border-bottom:2px solid transparent;cursor:pointer}
+.ptab.active{color:var(--f);border-bottom-color:var(--f)}
+.pbadge{background:var(--f);color:#000;font-size:9px;font-weight:700;padding:1px 5px;border-radius:20px;margin-left:4px}
+.group-bar-m{padding:7px 12px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px}
+.gl{font-size:9px;color:var(--text3);font-weight:600;text-transform:uppercase;letter-spacing:.07em}
+.pill-m{padding:3px 9px;border-radius:20px;font-size:9px;font-weight:500;border:1px solid var(--border);color:var(--text3)}
+.pill-m.active{border-color:var(--f);color:var(--f);background:rgba(212,23,138,0.1)}
+.items-wrap{padding:10px;overflow-y:auto;max-height:280px}
+.item-row{
+  display:flex;align-items:center;gap:8px;
+  padding:8px;background:var(--surface2);
+  border:1px solid var(--border);border-radius:10px;margin-bottom:6px;
+}
+.item-img-m{width:42px;height:42px;background:var(--surface);border-radius:6px;flex-shrink:0;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:20px}
+.item-info-m{flex:1;min-width:0}
+.item-title-m{font-size:11px;font-weight:500;color:var(--text);line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.item-variant-m{font-size:9px;color:var(--text3);margin:2px 0}
+.item-price-m{font-size:12px;font-weight:600;color:var(--gold)}
+.item-store-m{font-size:9px;color:var(--text3)}
+.item-remove{color:var(--text3);font-size:10px;cursor:pointer;flex-shrink:0}
+.popup-footer{
+  padding:12px 14px;border-top:1px solid var(--border);
+  background:#0c0c0e;
+}
+.total-row-m{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px}
+.total-lbl{font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:var(--text3)}
+.total-amt{font-family:'Playfair Display',serif;font-size:20px;font-weight:700}
+.total-note-m{font-size:9px;color:var(--text3);margin-bottom:10px}
+.buy-btn-m{
+  width:100%;background:var(--f);color:#fff;
+  border:none;border-radius:10px;
+  padding:10px;font-size:12px;font-weight:700;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;
+}
+.mockup-site{flex:1;padding:32px;background:#1a1a22}
+.site-label{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px}
+.site-product{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;display:flex;gap:16px;align-items:flex-start}
+.product-img{width:80px;height:80px;background:linear-gradient(135deg,#2a1a2e,#3d1a30);border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:32px}
+.product-info{flex:1}
+.product-name{font-size:13px;font-weight:500;margin-bottom:4px}
+.product-brand{font-size:10px;color:var(--text3);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em}
+.product-price{font-size:16px;font-weight:700;color:var(--gold);margin-bottom:12px}
+.save-float{
+  display:inline-flex;align-items:center;gap:6px;
+  background:#0f0f11;border:1px solid var(--border);
+  color:var(--text);font-size:11px;font-weight:600;
+  padding:8px 14px;border-radius:50px;cursor:pointer;
+  box-shadow:0 4px 16px rgba(0,0,0,0.4);
+  animation:pulse 2s infinite;
+}
+@keyframes pulse{0%,100%{box-shadow:0 4px 16px rgba(0,0,0,0.4)}50%{box-shadow:0 4px 24px rgba(212,23,138,0.3)}}
+.store-group-m{margin-top:14px}
+.sgroup-hdr{font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;display:flex;align-items:center;gap:5px}
+
+/* ── FEATURES ── */
+.features{padding:120px 48px;background:var(--surface)}
+.features-inner{max-width:1200px;margin:0 auto}
+.section-eyebrow{
+  font-size:11px;text-transform:uppercase;letter-spacing:.12em;
+  color:var(--f);font-weight:600;margin-bottom:12px;
+}
+.section-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(36px,4vw,52px);font-weight:700;
+  line-height:1.1;letter-spacing:-.02em;
+  margin-bottom:16px;
+}
+.section-sub{color:var(--text2);font-size:17px;font-weight:300;max-width:500px;line-height:1.6;margin-bottom:64px}
+.features-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+  background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;
+}
+.feat-card{
+  background:var(--surface);padding:36px 32px;
+  transition:background .2s;
+}
+.feat-card:hover{background:var(--surface2)}
+.feat-icon{
+  width:44px;height:44px;border-radius:10px;
+  background:rgba(212,23,138,0.1);border:1px solid rgba(212,23,138,0.2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;margin-bottom:20px;
+}
+.feat-title{font-size:17px;font-weight:600;margin-bottom:8px}
+.feat-desc{font-size:14px;color:var(--text2);line-height:1.65;font-weight:300}
+
+/* ── HOW IT WORKS ── */
+.how{padding:120px 48px}
+.how-inner{max-width:1200px;margin:0 auto}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;margin-top:64px}
+.step{position:relative}
+.step-num{
+  font-family:'Playfair Display',serif;
+  font-size:52px;font-weight:900;
+  color:rgba(212,23,138,0.42);
+  line-height:1;margin-bottom:10px;
+}
+.step-line{
+  width:calc(100% - 4px);height:1px;
+  background:rgba(212,23,138,0.5);
+  margin-bottom:14px;
+  border-radius:2px;
+  background:linear-gradient(90deg,var(--f),transparent);
+  pointer-events:none;
+}
+.step-title{font-size:16px;font-weight:600;margin-bottom:8px}
+.step-desc{font-size:14px;color:var(--text2);line-height:1.6;font-weight:300}
+
+
+/* ── GROUPING FEATURE ── */
+.grouping{
+  padding:120px 48px;background:var(--surface);
+}
+.grouping-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.group-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px}
+.gtab{
+  padding:8px 18px;border-radius:50px;font-size:13px;font-weight:500;
+  border:1px solid var(--border);color:var(--text2);cursor:pointer;
+  transition:all .2s;
+}
+.gtab.active,.gtab:hover{border-color:var(--f);color:var(--f);background:rgba(212,23,138,0.08)}
+.grouping-desc{font-size:15px;color:var(--text2);line-height:1.7;font-weight:300;margin-bottom:24px}
+.grouping-visual{
+  background:var(--surface2);border:1px solid var(--border);
+  border-radius:16px;padding:24px;
+}
+.gv-item{
+  display:flex;align-items:center;gap:12px;
+  padding:10px;border-radius:10px;
+  background:var(--surface);border:1px solid var(--border);
+  margin-bottom:8px;font-size:12px;
+}
+.gv-thumb{width:36px;height:36px;border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:18px}
+.gv-name{flex:1;font-weight:500}
+.gv-price{color:var(--gold);font-weight:600}
+
+/* ── PRIVACY ── */
+.privacy{padding:80px 48px;border-top:1px solid var(--border)}
+.privacy-inner{
+  max-width:1200px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap;
+}
+.privacy-left h2{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;margin-bottom:8px}
+.privacy-left p{color:var(--text2);font-size:15px;font-weight:300}
+.privacy-points{display:flex;gap:24px;flex-wrap:wrap}
+.priv-point{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text2)}
+.priv-point span{color:var(--gold)}
+
+/* ── CTA BAND ── */
+.cta-band{
+  padding:120px 48px;text-align:center;
+  background:linear-gradient(180deg,var(--bg) 0%,rgba(212,23,138,0.05) 50%,var(--bg) 100%);
+}
+.cta-band h2{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(40px,5vw,64px);font-weight:900;
+  letter-spacing:-.02em;margin-bottom:16px;
+}
+.cta-band p{color:var(--text2);font-size:18px;font-weight:300;margin-bottom:40px}
+
+/* ── FOOTER ── */
+footer{
+  padding:40px 48px;
+  border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;
+}
+.footer-logo{font-family:'Playfair Display',serif;font-size:18px;font-weight:700}
+.footer-links{display:flex;gap:24px}
+.footer-links a{color:var(--text3);font-size:13px;text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:var(--text2)}
+.footer-copy{color:var(--text3);font-size:12px}
+
+/* ── ANIMATIONS ── */
+.fade-in{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:900px){
+  nav{padding:14px 24px}
+  .nav-links{display:none}
+  .hero,.demo-section,.features,.how,.grouping,.privacy,.cta-band{padding-left:24px;padding-right:24px}
+  h1{font-size:48px}
+  .features-grid{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr 1fr}
+
+  .grouping-inner{grid-template-columns:1fr}
+  .mockup-site{display:none}
+  .mockup-popup{width:100%}
+  footer{padding:32px 24px;flex-direction:column;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">🛍&thinsp;<span class="logo-word">Big Bag</span></a>
+  <div class="nav-links">
+    <a href="#features">Features</a>
+    <a href="#how">How it works</a>
+    <a href="#privacy">Privacy</a>
+    <a href="privacy.html">Privacy Policy</a>
+  </div>
+  <a href="https://chromewebstore.google.com" class="nav-cta" target="_blank">Add to Chrome — Free</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Chrome Extension</div>
+    <h1>One bag,<br/><em>every</em> store.</h1>
+    <p class="hero-sub">Stop juggling 12 browser tabs. Save items from any online store — in any currency — into one universal shopping bag, then buy everything at once.</p>
+    <div class="hero-actions">
+      <a href="https://chromewebstore.google.com" class="btn-primary" target="_blank">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        Add to Chrome — Free
+      </a>
+      <a href="#how" class="btn-ghost">See how it works →</a>
+    </div>
+    <div class="hero-proof">
+      <div class="hero-proof-item"><span>✦</span> Free</div>
+      <div class="proof-div"></div>
+      <div class="hero-proof-item"><span>✦</span> No account needed</div>
+      <div class="proof-div"></div>
+      <div class="hero-proof-item"><span>✦</span> All data stays on your device</div>
+      <div class="proof-div"></div>
+      <div class="hero-proof-item"><span>✦</span> Works on any store</div>
+      <div class="proof-div"></div>
+      <div class="hero-proof-item"><span>✦</span> Every currency supported</div>
+      <div class="proof-div"></div>
+      <div class="hero-proof-item"><span>✦</span> Every currency: $, £, €, ¥ and more</div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO MOCKUP -->
+<section class="demo-section">
+  <div class="demo-inner">
+    <p class="demo-label">The extension in action</p>
+    <div class="mockup-wrap fade-in">
+      <div class="mockup-bar">
+        <div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-dot"></div>
+        <div class="mockup-url">asos.com/women/dresses/icat/womendresses</div>
+      </div>
+      <div class="mockup-body">
+        <!-- Popup -->
+        <div class="mockup-popup">
+          <div class="popup-header">
+            <div class="popup-logo">Big Bag<sub>One bag, every store</sub></div>
+            <div style="font-size:10px;color:var(--text3)">🌙</div>
+          </div>
+          <div class="popup-tabs">
+            <div class="ptab active">Bag <span class="pbadge">4</span></div>
+            <div class="ptab">Autofill Profile</div>
+          </div>
+          <div class="group-bar-m">
+            <span class="gl">Group by</span>
+            <span class="pill-m active">🏪 Store</span>
+            <span class="pill-m">🏷 Category</span>
+            <span class="pill-m">💰 Price</span>
+          </div>
+          <div class="items-wrap">
+            <div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;padding:4px 2px 6px;display:flex;align-items:center;gap:5px"><span>🌐</span> amazon.com <span style="margin-left:auto;color:var(--gold)">$248.00</span></div>
+            <div class="item-row">
+              <div class="item-img-m">🎧</div>
+              <div class="item-info-m">
+                <div class="item-title-m">Sony WH-1000XM5 Headphones</div>
+                <div class="item-variant-m">Midnight Black</div>
+                <div class="item-price-m">$248.00</div>
+              </div>
+              <div class="item-remove">✕</div>
+            </div>
+            <div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;padding:8px 2px 6px;display:flex;align-items:center;gap:5px"><span>🌐</span> nike.com <span style="margin-left:auto;color:var(--gold)">$110.00</span></div>
+            <div class="item-row">
+              <div class="item-img-m">👟</div>
+              <div class="item-info-m">
+                <div class="item-title-m">Nike Air Max 90</div>
+                <div class="item-variant-m">US 10 / White-Black</div>
+                <div class="item-price-m">$110.00</div>
+              </div>
+              <div class="item-remove">✕</div>
+            </div>
+            <div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;padding:8px 2px 6px;display:flex;align-items:center;gap:5px"><span>🌐</span> uniqlo.com <span style="margin-left:auto;color:var(--gold)">$89.80</span></div>
+            <div class="item-row">
+              <div class="item-img-m">🧥</div>
+              <div class="item-info-m">
+                <div class="item-title-m">Merino Wool Crewneck</div>
+                <div class="item-variant-m">Size M / Navy</div>
+                <div class="item-price-m">$49.90</div>
+              </div>
+              <div class="item-remove">✕</div>
+            </div>
+            <div class="item-row">
+              <div class="item-img-m">🎒</div>
+              <div class="item-info-m">
+                <div class="item-title-m">Nylon Shoulder Bag</div>
+                <div class="item-variant-m">Slate Grey</div>
+                <div class="item-price-m">$39.90</div>
+              </div>
+              <div class="item-remove">✕</div>
+            </div>
+          </div>
+          <div class="popup-footer">
+            <div class="total-row-m">
+              <span class="total-lbl">Estimated Total</span>
+              <span class="total-amt">$447.80</span>
+            </div>
+            <div class="total-note-m">5 items across 3 stores</div>
+            <button class="buy-btn-m">⚡ Buy All — Open in Stores</button>
+          </div>
+        </div>
+        <!-- Site mockup -->
+        <div class="mockup-site">
+          <div class="site-label">Product page — amazon.com</div>
+          <div class="site-product">
+            <div class="product-img">🎧</div>
+            <div class="product-info">
+              <div class="product-brand">Sony</div>
+              <div class="product-name">WH-1000XM5 Wireless Headphones</div>
+              <div class="product-price">$248.00</div>
+              <div class="save-float">🛍 Save to Big Bag</div>
+            </div>
+          </div>
+          <div style="margin-top:24px;font-size:11px;color:var(--text3);line-height:1.8">
+            <div style="margin-bottom:6px;font-weight:500;color:var(--text2)">Your Big Bag</div>
+            <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)"><span>Sony WH-1000XM5</span><span style="color:var(--gold)">$248.00</span></div>
+            <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)"><span>Nike Air Max 90</span><span style="color:var(--gold)">$110.00</span></div>
+            <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)"><span>Merino Wool Crewneck</span><span style="color:var(--gold)">$49.90</span></div>
+            <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)"><span>Nylon Shoulder Bag</span><span style="color:var(--gold)">$39.90</span></div>
+            <div style="display:flex;justify-content:space-between;padding:8px 0;font-weight:600;color:var(--text)"><span>Total so far</span><span style="color:var(--gold)">$447.80</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <div class="features-inner">
+    <div class="section-eyebrow">Everything you need</div>
+    <h2 class="section-title">Built for the way<br/>people actually shop</h2>
+    <p class="section-sub">Most people shop across 5–10 different stores for a single haul. Big Bag was built for exactly that.</p>
+    <div class="features-grid fade-in">
+      <div class="feat-card">
+        <div class="feat-icon">🛍</div>
+        <div class="feat-title">Save from anywhere</div>
+        <p class="feat-desc">A floating "Save to Big Bag" button appears automatically on any product page. One click captures the title, price, image, selected variant, and link.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">🏷</div>
+        <div class="feat-title">Smart grouping</div>
+        <p class="feat-desc">View your bag grouped by store, product category (auto-detected), price range, or your own priority tags. Switch views instantly.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">💰</div>
+        <div class="feat-title">Running total</div>
+        <p class="feat-desc">See your estimated grand total across all stores and currencies, updated in real time. Know exactly what you're about to spend before you commit.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">⚡</div>
+        <div class="feat-title">Buy All</div>
+        <p class="feat-desc">One button opens each product page, automatically adds to cart, navigates to checkout, and autofills your saved shipping details.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">✍</div>
+        <div class="feat-title">Checkout autofill</div>
+        <p class="feat-desc">Save your name, address, and payment details once. Big Bag fills checkout forms automatically on any store — no retyping, ever.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">🌙</div>
+        <div class="feat-title">Light & dark mode</div>
+        <p class="feat-desc">A sleek dark mode with gold accents, and a crisp light mode with fuchsia accents. Both designed to feel fashion-forward, not generic.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div class="how-inner">
+    <div class="section-eyebrow">How it works</div>
+    <h2 class="section-title">Four steps to<br/>a full haul</h2>
+    <div class="steps fade-in">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-line"></div>
+        <div class="step-title">Install Big Bag</div>
+        <p class="step-desc">Add to Chrome in one click. No account, no sign-up, no email required.</p>
+        
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-line"></div>
+        <div class="step-title">Browse & save</div>
+        <p class="step-desc">Visit any product page. Click "Save to Big Bag" — it captures everything including your selected size and colour.</p>
+        
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-line"></div>
+        <div class="step-title">Review your bag</div>
+        <p class="step-desc">Open the popup to see all items grouped by store, category, or price. Adjust quantities, set priorities, see your total.</p>
+        
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-line"></div>
+        <div class="step-title">Buy all at once</div>
+        <p class="step-desc">Hit Buy All. Big Bag opens each store, adds to cart, goes to checkout, and fills in your details automatically.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GROUPING FEATURE HIGHLIGHT -->
+<section class="grouping" id="grouping">
+  <div class="grouping-inner">
+    <div>
+      <div class="section-eyebrow">Smart organisation</div>
+      <h2 class="section-title">Your bag,<br/>your way</h2>
+      <div class="group-tabs">
+        <div class="gtab active">🏪 By store</div>
+        <div class="gtab">🏷 By category</div>
+        <div class="gtab">💰 By price</div>
+        <div class="gtab">⭐ By priority</div>
+      </div>
+      <p class="grouping-desc">Switch between grouping modes instantly. See everything from ASOS in one place, or view all your Clothing picks together. Assign Need it / Want it / Maybe priorities. Filter by budget range.</p>
+      <p class="grouping-desc" style="font-size:13px">Category is auto-detected from the product page — no manual tagging needed. You can always override it with one tap.</p>
+    </div>
+    <div class="grouping-visual fade-in">
+      <div style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px">💻 Electronics</div>
+      <div class="gv-item"><div class="gv-thumb">🎧</div><div class="gv-name">Sony WH-1000XM5<br/><span style="font-size:10px;color:var(--text3)">amazon.com · Midnight Black</span></div><div class="gv-price">$248.00</div></div>
+      <div style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin:14px 0"><span>👟</span> Shoes</div>
+      <div class="gv-item"><div class="gv-thumb">👟</div><div class="gv-name">Nike Air Max 90<br/><span style="font-size:10px;color:var(--text3)">nike.com · US 10 / White</span></div><div class="gv-price">$110.00</div></div>
+      <div style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin:14px 0"><span>👕</span> Clothing</div>
+      <div class="gv-item"><div class="gv-thumb">🧥</div><div class="gv-name">Merino Wool Crewneck<br/><span style="font-size:10px;color:var(--text3)">uniqlo.com · Size M / Navy</span></div><div class="gv-price">$49.90</div></div>
+      <div style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin:14px 0"><span>🎒</span> Bags & Accessories</div>
+      <div class="gv-item"><div class="gv-thumb">🎒</div><div class="gv-name">Nylon Shoulder Bag<br/><span style="font-size:10px;color:var(--text3)">uniqlo.com · Slate Grey</span></div><div class="gv-price">$39.90</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRIVACY -->
+<section class="privacy" id="privacy">
+  <div class="privacy-inner">
+    <div class="privacy-left">
+      <h2>Built with your privacy in mind</h2>
+      <p>Everything stays on your device. No servers, no tracking, no ads.</p>
+    </div>
+    <div class="privacy-points">
+      <div class="priv-point"><span>✦</span> Data stored locally only</div>
+      <div class="priv-point"><span>✦</span> Nothing sent to any server</div>
+      <div class="priv-point"><span>✦</span> No analytics or tracking</div>
+      <div class="priv-point"><span>✦</span> No account required</div>
+      <div class="priv-point"><span>✦</span> Payment info never transmitted</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section class="cta-band">
+  <h2>Fill your<br/><em style="color:var(--f);font-style:italic">Big Bag</em> today.</h2>
+  <p>Free. No account. Works on every store.</p>
+  <a href="https://chromewebstore.google.com" class="btn-primary" target="_blank" style="display:inline-flex">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+    Add to Chrome — Free
+  </a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">🛍&thinsp;Big Bag</div>
+  <div class="footer-links">
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="https://chromewebstore.google.com" target="_blank">Chrome Web Store</a>
+  </div>
+  <div class="footer-copy">© 2026 Big Bag. All rights reserved.</div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible') })
+}, { threshold: 0.1 })
+document.querySelectorAll('.fade-in').forEach(el => obs.observe(el))
+
+// Group tab interactivity
+document.querySelectorAll('.gtab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.gtab').forEach(t => t.classList.remove('active'))
+    tab.classList.add('active')
+  })
+})
+</script>
+</body>
+</html>
